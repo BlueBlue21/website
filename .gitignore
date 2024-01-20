@@ -1,0 +1,12 @@
+# replit
+.config
+.build
+.cache
+.upm
+.tmp
+.git
+replit.nix
+.replit
+
+# node
+/node_modules
