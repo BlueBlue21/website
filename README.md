@@ -17,7 +17,7 @@ npm run build
 npm run start
 ```
 
-## TODO 💎
+## Todo 💎
 
 - [ ] Korean
 - [ ] Framer Motion

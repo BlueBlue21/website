@@ -1,12 +1,20 @@
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Heading, Divider, Box, Link, Text, Flex } from "@chakra-ui/react";
+import {
+  Heading,
+  Divider,
+  Skeleton,
+  Flex,
+  Box,
+  Link,
+  Text,
+} from "@chakra-ui/react";
 
 import Title from "../components/Title";
 import Card from "../components/Card";
+import { GitHubIcon } from "../icons";
 
 import { config } from "../config";
-import { GitHubIcon } from "../icons";
 
 export default function NotFound() {
   const [links, changeLinks] = useState<string[]>([]);
@@ -32,34 +40,34 @@ export default function NotFound() {
   return (
     <Card height="500px" scrollY={true}>
       {error ? (
-        <Heading color="red.500" fontSize="x-large">
+        <Heading fontSize="x-large" color="red.500">
           Error!
         </Heading>
-      ) : isPending ? (
-        <Heading fontSize="x-large">Loading...</Heading>
       ) : (
-        <Heading color="brandBlue.100" fontSize="x-large">
+        <Heading fontSize="x-large" color="brandBlue.100">
           Projects
         </Heading>
       )}
       <Divider />
-      <Flex direction="column" gap="5">
-        {names.map((value, index) => (
-          <Box key={index}>
-            <Link
-              href={links[index]}
-              isExternal
-              fontWeight="semibold"
-              fontSize="large"
-              color="brandBlue.100"
-              _hover={{ textDecoration: "none", color: "brandBlue.200" }}
-            >
-              {value} <GitHubIcon mx="2px" />
-            </Link>
-            <Text>{descriptions[index]}</Text>
-          </Box>
-        ))}
-      </Flex>
+      <Skeleton isLoaded={!isPending}>
+        <Flex direction="column" gap="3">
+          {names.map((value, index) => (
+            <Box key={index}>
+              <Link
+                href={links[index]}
+                isExternal
+                fontWeight="semibold"
+                fontSize="large"
+                color="brandBlue.100"
+                _hover={{ textDecoration: "none", color: "brandBlue.200" }}
+              >
+                {value} <GitHubIcon mx="2px" />
+              </Link>
+              <Text>{descriptions[index]}</Text>
+            </Box>
+          ))}
+        </Flex>
+      </Skeleton>
     </Card>
   );
 }

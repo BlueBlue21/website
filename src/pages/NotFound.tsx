@@ -6,12 +6,12 @@ import Card from "../components/Card";
 
 export default function NotFound() {
   const navigate = useNavigate();
-  Title("BlueBlue21! - Not Found");
   function backToHome() {
     navigate("/");
   }
+  Title("BlueBlue21! - Not Found");
   return (
-    <Card height="auto">
+    <Card height="auto" scrollY={false}>
       <Heading fontSize="x-large" color="brandBlue.100">
         404 - Not Found!
       </Heading>

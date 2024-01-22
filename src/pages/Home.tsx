@@ -1,13 +1,12 @@
 import {
   AspectRatio,
   Image,
+  Box,
   Heading,
   Highlight,
   Text,
-  ButtonGroup,
   Button,
-  Box,
-  Divider,
+  ButtonGroup,
   useDisclosure,
   useToast,
 } from "@chakra-ui/react";
@@ -73,24 +72,23 @@ export default function Home() {
           developer... But I always waste my timee!
         </Text>
       </Box>
-
       <Button {...buttonProps} colorScheme="blue">
         Tech Stack
       </Button>
       <Box {...disclosureProps} w="90%">
-        <Heading color="brandBlue.100" fontSize="large">
+        <Heading fontSize="large" color="brandBlue.100">
           My Tech Stack(Temp)
         </Heading>
-        <Text fontSize="sm">
+        <Text fontSize="small">
           Languages : C, Go, Python, JavaScript, TypeScript, (HTML, CSS), etc.
           <br />
-          Others : SQLite, MongoDB, Express, React, Next.js, Chakra UI, Godot
-          Engine, etc.
+          Others : SQLite, MongoDB, Express, React, Next.js, Chakra UI, Fyne,
+          Godot Engine, etc.
           <br />
           Tools : Neovim, Visual Studio, Visual Studio Code, Zed, (Some
           Jetbrains Produect), Blender, etc.
         </Text>
-        <Text fontWeight="bold" fontSize="xs">
+        <Text fontWeight="bold" fontSize="x-small">
           * BUT I'M SUPER NOOBB!
         </Text>
       </Box>

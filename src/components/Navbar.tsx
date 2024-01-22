@@ -1,5 +1,5 @@
 import { Link as ReactRouterLink, NavLink } from "react-router-dom";
-import { Flex, Box, Link as ChakraLink, Spacer } from "@chakra-ui/react";
+import { Flex, Link as ChakraLink, Spacer } from "@chakra-ui/react";
 
 interface NavLinkButtonProps {
   href: string;
@@ -31,18 +31,16 @@ export default function Navbar() {
       borderRadius="lg"
       boxShadow="md"
     >
-      <Box>
-        <ChakraLink
-          as={ReactRouterLink}
-          to="/"
-          color="brandBlue.100"
-          fontWeight="semibold"
-          fontSize="x-large"
-          _hover={{ textDecoration: "none", color: "brandBlue.200" }}
-        >
-          BlueBlue21
-        </ChakraLink>
-      </Box>
+      <ChakraLink
+        as={ReactRouterLink}
+        to="/"
+        fontWeight="semibold"
+        fontSize="x-large"
+        color="brandBlue.100"
+        _hover={{ textDecoration: "none", color: "brandBlue.200" }}
+      >
+        BlueBlue21
+      </ChakraLink>
       <Spacer />
       <Flex gap="2">
         <NavLinkButton href="/blog">Blog</NavLinkButton>

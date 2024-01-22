@@ -12,15 +12,15 @@ const config: ThemeConfig = {
 
 const theme = extendTheme({
   config,
+  fonts: {
+    heading: `"Sora", "NanumSquareNeo-Variable"`,
+    body: `"Sora", "NanumSquareNeo-Variable"`,
+  },
   colors: {
     brandBlue: {
       100: "#1f75f5",
       200: "#125dcc",
     },
-  },
-  fonts: {
-    heading: `"Sora", "NanumSquareNeo-Variable"`,
-    body: `"Sora", "NanumSquareNeo-Variable"`,
   },
   styles: {
     global: (props: StyleFunctionProps) => ({
