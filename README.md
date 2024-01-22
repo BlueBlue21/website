@@ -1,6 +1,6 @@
 # My Website 📘
 
-Made with Typescript based React and Million.js(SO FAST!), Chakra UI
+Made with Typescript based React and Chakra UI.
 
 SORRY MY ENGLISH VERY SUCKSS...
 
@@ -16,3 +16,9 @@ npm run dev
 npm run build
 npm run start
 ```
+
+## TODO 💎
+
+- [ ] Korean
+- [ ] Framer Motion
+- [ ] Blog System
