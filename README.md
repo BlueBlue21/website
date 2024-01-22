@@ -22,3 +22,10 @@ npm run start
 - [ ] Korean
 - [ ] Framer Motion
 - [ ] Blog System
+
+## ISSUE 😡😡
+
+- [ ] The page breaks when the url is changed. (Rewritten by Copilot)
+- [ ] The UI breaks when the display size is smaller than 300px. (Rewritten by Copilot)
+- [ ] The Skeleton component of Chakra UI is malfunctioning. (Rewritten by Copilot)
+- [ ] Some buttons do not match the brand blue color. (Rewritten by Copilot)
