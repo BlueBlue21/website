@@ -66,7 +66,7 @@ export default function Home() {
             Hi, It's BlueBlue21! 👋
           </Highlight>
         </Heading>
-        <Text>He/his, {age} years old.</Text>
+        <Text>He/Him, {age} years old.</Text>
         <Text>
           I was born in Seoul, in South Korea. My dream is to be a happy
           developer... But I always waste my timee!
