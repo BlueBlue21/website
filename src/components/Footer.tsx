@@ -37,9 +37,12 @@ function ThemeToggleButton() {
 }
 
 export default function Footer() {
+  const nowYear = new Date().getFullYear();
   return (
     <Flex p="20px" h="full" alignItems="center">
-      <Text fontWeight="medium">© 2024 BlueBlue. All rights reserved.</Text>
+      <Text fontWeight="medium">
+        © {nowYear} BlueBlue. All rights reserved.
+      </Text>
       <Spacer />
       <ButtonGroup>
         <LanguageToggleButton />

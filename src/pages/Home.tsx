@@ -23,7 +23,7 @@ export default function Home() {
   const buttonProps = getButtonProps();
   const disclosureProps = getDisclosureProps();
   const toast = useToast();
-  const age = new Date().getFullYear() - 2008;
+  const myAge = new Date().getFullYear() - 2008;
   function showToast(title: string, description: string) {
     toast({
       title: title,
@@ -66,7 +66,7 @@ export default function Home() {
             Hi, It's BlueBlue21! 👋
           </Highlight>
         </Heading>
-        <Text>He/Him, {age} years old.</Text>
+        <Text>He/Him, {myAge} years old.</Text>
         <Text>
           I was born in Seoul, in South Korea. My dream is to be a happy
           developer... But I always waste my timee!
