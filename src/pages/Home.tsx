@@ -99,7 +99,7 @@ export default function Home() {
         <Button colorScheme="purple" onClick={discord}>
           <DiscordIcon />
         </Button>
-        <Button colorScheme="grey" onClick={goToGitHub}>
+        <Button colorScheme="gray" onClick={goToGitHub}>
           <GitHubIcon />
         </Button>
         <Button colorScheme="orange" onClick={goToReplit}>
