@@ -29,7 +29,7 @@ export default function Home() {
       title: title,
       description: description,
       status: "info",
-      duration: 3000,
+      duration: 3500,
       isClosable: true,
     });
   }
@@ -40,7 +40,7 @@ export default function Home() {
   }
   function discord() {
     showToast("Discord", config.discordUsername);
-    window.open(`https://discord.com/users/${config.discordId}`);
+    // window.open(`https://discord.com/users/${config.discordId}`);
   }
   function goToGitHub() {
     window.open(`https://github.com/${config.gitHubUsername}`);
