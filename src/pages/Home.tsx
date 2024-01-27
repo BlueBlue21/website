@@ -69,7 +69,7 @@ export default function Home() {
         <Text>He/Him, {myAge} years old.</Text>
         <Text>
           I was born in Seoul, in South Korea. My dream is to be a happy
-          developer... But I always waste my timee!
+          developer. But I always waste my time...
         </Text>
       </Box>
       <Button {...buttonProps} colorScheme="blue">
