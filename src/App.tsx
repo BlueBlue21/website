@@ -16,9 +16,9 @@ export default function App() {
       <ChakraProvider theme={theme}>
         <Fonts />
         <Grid
-          templateAreas={`"navbar navbar"
-                            "main main"
-                            "footer footer"`}
+          templateAreas={`"navbar"
+                            "main"
+                            "footer"`}
           gridTemplateRows={"70px 1fr 70px"}
           h="100vh"
         >
