@@ -18,8 +18,16 @@ const theme = extendTheme({
   },
   colors: {
     brandBlue: {
+      50: "#e8f1fe",
       100: "#1f75f5",
       200: "#125dcc",
+      300: "#6397f6",
+      400: "#3f7cf4",
+      500: "#1f75f5",
+      600: "#125dcc",
+      700: "#0e4fb0",
+      800: "#0a3e8c",
+      900: "#072d68",
     },
   },
   styles: {

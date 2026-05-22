@@ -15,32 +15,33 @@ import { EmailIcon } from "@chakra-ui/icons";
 import Title from "../components/Title";
 import Card from "../components/Card";
 import { DiscordIcon, GitHubIcon, ReplitIcon } from "../icons";
+import { useLanguage } from "../contexts/LanguageContext";
 
 import { config } from "../config";
 
 export default function Home() {
+  const { t, language } = useLanguage();
   const { getDisclosureProps, getButtonProps } = useDisclosure();
   const buttonProps = getButtonProps();
   const disclosureProps = getDisclosureProps();
   const toast = useToast();
   const myAge = new Date().getFullYear() - 2008;
+
   function showToast(title: string, description: string) {
     toast({
-      title: title,
-      description: description,
+      title,
+      description,
       status: "info",
       duration: 3500,
       isClosable: true,
     });
   }
   function email() {
-    const email = config.email;
-    showToast("Email", email);
-    location.href = `mailto:${email}`;
+    showToast(t.toast.emailTitle, config.email);
+    location.href = `mailto:${config.email}`;
   }
   function discord() {
-    showToast("Discord", config.discordUsername);
-    // window.open(`https://discord.com/users/${config.discordId}`);
+    showToast(t.toast.discordTitle, config.discordUsername);
   }
   function goToGitHub() {
     window.open(`https://github.com/${config.gitHubUsername}`);
@@ -48,6 +49,7 @@ export default function Home() {
   function goToReplit() {
     window.open(`https://replit.com/@${config.replitUsername}`);
   }
+
   Title("BlueBlue21!");
   return (
     <Card height="auto" scrollY={false}>
@@ -63,37 +65,35 @@ export default function Home() {
       <Box>
         <Heading fontSize="xl">
           <Highlight query="BlueBlue21!" styles={{ color: "brandBlue.100" }}>
-            Hi, It's BlueBlue21! 👋
+            {t.home.greeting}
           </Highlight>
         </Heading>
-        <Text>He/Him, {myAge} years old.</Text>
         <Text>
-          I was born in Seoul, in South Korea. My dream is to be a happy
-          developer. But I always waste my time...
+          {t.home.gender}, {myAge}
+          {language === "ko" ? t.home.ageUnit : ` ${t.home.ageUnit}.`}
         </Text>
+        <Text>{t.home.bio}</Text>
       </Box>
-      <Button {...buttonProps} colorScheme="blue">
-        Tech Stack
+      <Button {...buttonProps} colorScheme="brandBlue">
+        {t.home.techStack}
       </Button>
       <Box {...disclosureProps} w="90%">
         <Heading fontSize="large" color="brandBlue.100">
-          My Tech Stack(Temp)
+          {t.home.techStackTitle}
         </Heading>
         <Text fontSize="small">
-          Languages : C, Go, Python, JavaScript, TypeScript, (HTML, CSS), etc.
+          {t.home.techStackLangs}
           <br />
-          Others : SQLite, MongoDB, Express, React, Next.js, Chakra UI, Fyne,
-          Godot Engine, etc.
+          {t.home.techStackOthers}
           <br />
-          Tools : Neovim, Visual Studio, Visual Studio Code, Zed, (Some
-          Jetbrains Produect), Blender, etc.
+          {t.home.techStackTools}
         </Text>
         <Text fontWeight="bold" fontSize="x-small">
-          * BUT I'M SUPER NOOBB!
+          {t.home.techStackNote}
         </Text>
       </Box>
       <ButtonGroup variant="outline" spacing="5px">
-        <Button colorScheme="blue" onClick={email}>
+        <Button colorScheme="brandBlue" onClick={email}>
           <EmailIcon />
         </Button>
         <Button colorScheme="purple" onClick={discord}>

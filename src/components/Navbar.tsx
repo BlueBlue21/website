@@ -1,5 +1,6 @@
 import { Link as ReactRouterLink, NavLink } from "react-router-dom";
 import { Flex, Link as ChakraLink, Spacer } from "@chakra-ui/react";
+import { useLanguage } from "../contexts/LanguageContext";
 
 interface NavLinkButtonProps {
   href: string;
@@ -22,6 +23,7 @@ function NavLinkButton({ href, children }: NavLinkButtonProps) {
 }
 
 export default function Navbar() {
+  const { t } = useLanguage();
   return (
     <Flex
       p="10px"
@@ -43,8 +45,8 @@ export default function Navbar() {
       </ChakraLink>
       <Spacer />
       <Flex gap="2">
-        <NavLinkButton href="/blog">Blog</NavLinkButton>
-        <NavLinkButton href="/projects">Projects</NavLinkButton>
+        <NavLinkButton href="/blog">{t.nav.blog}</NavLinkButton>
+        <NavLinkButton href="/projects">{t.nav.projects}</NavLinkButton>
       </Flex>
     </Flex>
   );

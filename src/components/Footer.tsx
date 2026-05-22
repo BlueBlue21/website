@@ -4,25 +4,16 @@ import {
   Spacer,
   ButtonGroup,
   Button,
-  useToast,
   useColorMode,
 } from "@chakra-ui/react";
 import { SunIcon, MoonIcon } from "@chakra-ui/icons";
+import { useLanguage } from "../contexts/LanguageContext";
 
 function LanguageToggleButton() {
-  const toast = useToast();
-  function showToast() {
-    toast({
-      title: "미안해요...",
-      description: "아직 한국어 페이지를 만들지 못 했습니다...",
-      status: "info",
-      duration: 1500,
-      isClosable: true,
-    });
-  }
+  const { t, toggleLanguage } = useLanguage();
   return (
-    <Button variant="ghost" onClick={showToast}>
-      한글
+    <Button variant="ghost" onClick={toggleLanguage}>
+      {t.footer.language}
     </Button>
   );
 }
@@ -30,18 +21,19 @@ function LanguageToggleButton() {
 function ThemeToggleButton() {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Button colorScheme="blue" onClick={toggleColorMode}>
-      {colorMode == "light" ? <MoonIcon /> : <SunIcon />}
+    <Button colorScheme="brandBlue" onClick={toggleColorMode}>
+      {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
     </Button>
   );
 }
 
 export default function Footer() {
+  const { t } = useLanguage();
   const nowYear = new Date().getFullYear();
   return (
     <Flex p="20px" h="full" alignItems="center">
       <Text fontWeight="medium">
-        © {nowYear} BlueBlue. All rights reserved.
+        © {nowYear} BlueBlue. {t.footer.copyright}
       </Text>
       <Spacer />
       <ButtonGroup>
