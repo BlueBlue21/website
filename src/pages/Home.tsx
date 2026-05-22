@@ -1,40 +1,19 @@
-import {
-  AspectRatio,
-  Image,
-  Box,
-  Heading,
-  Highlight,
-  Text,
-  Button,
-  ButtonGroup,
-  useDisclosure,
-  useToast,
-} from "@chakra-ui/react";
-import { EmailIcon } from "@chakra-ui/icons";
-
+import { Box, Flex, Image, Heading, Text, Button, chakra, useDisclosure } from "@chakra-ui/react";
+import { Mail } from "lucide-react";
+import { DiscordIcon, GitHubIcon, ReplitIcon } from "../icons";
+import { toaster } from "../lib/toaster";
+import { useLanguage } from "../contexts/LanguageContext";
 import Title from "../components/Title";
 import Card from "../components/Card";
-import { DiscordIcon, GitHubIcon, ReplitIcon } from "../icons";
-import { useLanguage } from "../contexts/LanguageContext";
-
 import { config } from "../config";
 
 export default function Home() {
   const { t, language } = useLanguage();
-  const { getDisclosureProps, getButtonProps } = useDisclosure();
-  const buttonProps = getButtonProps();
-  const disclosureProps = getDisclosureProps();
-  const toast = useToast();
+  const { open, onToggle } = useDisclosure();
   const myAge = new Date().getFullYear() - 2008;
 
   function showToast(title: string, description: string) {
-    toast({
-      title,
-      description,
-      status: "info",
-      duration: 3500,
-      isClosable: true,
-    });
+    toaster.create({ title, description, type: "info", duration: 3500 });
   }
   function email() {
     showToast(t.toast.emailTitle, config.email);
@@ -53,20 +32,14 @@ export default function Home() {
   Title("BlueBlue21!");
   return (
     <Card height="auto" scrollY={false}>
-      <AspectRatio w="100px" ratio={1 / 1}>
-        <Image
-          src="/profile.png"
-          alt="Me!"
-          objectFit="cover"
-          borderRadius="full"
-          boxShadow="lg"
-        />
-      </AspectRatio>
+      <Box w="100px" h="100px" borderRadius="full" overflow="hidden" boxShadow="lg">
+        <Image src="/profile.png" alt="Me!" w="full" h="full" objectFit="cover" />
+      </Box>
       <Box>
         <Heading fontSize="xl">
-          <Highlight query="BlueBlue21!" styles={{ color: "brandBlue.100" }}>
-            {t.home.greeting}
-          </Highlight>
+          {t.home.greeting.split("BlueBlue21")[0]}
+          <chakra.span color="brandBlue.100">BlueBlue21</chakra.span>
+          {t.home.greeting.split("BlueBlue21")[1]}
         </Heading>
         <Text>
           {t.home.gender}, {myAge}
@@ -74,38 +47,40 @@ export default function Home() {
         </Text>
         <Text>{t.home.bio}</Text>
       </Box>
-      <Button {...buttonProps} colorScheme="brandBlue">
+      <Button colorPalette="brandBlue" onClick={onToggle}>
         {t.home.techStack}
       </Button>
-      <Box {...disclosureProps} w="90%">
-        <Heading fontSize="large" color="brandBlue.100">
-          {t.home.techStackTitle}
-        </Heading>
-        <Text fontSize="small">
-          {t.home.techStackLangs}
-          <br />
-          {t.home.techStackOthers}
-          <br />
-          {t.home.techStackTools}
-        </Text>
-        <Text fontWeight="bold" fontSize="x-small">
-          {t.home.techStackNote}
-        </Text>
-      </Box>
-      <ButtonGroup variant="outline" spacing="5px">
-        <Button colorScheme="brandBlue" onClick={email}>
-          <EmailIcon />
+      {open && (
+        <Box w="90%">
+          <Heading fontSize="lg" color="brandBlue.100">
+            {t.home.techStackTitle}
+          </Heading>
+          <Text fontSize="sm">
+            {t.home.techStackLangs}
+            <br />
+            {t.home.techStackOthers}
+            <br />
+            {t.home.techStackTools}
+          </Text>
+          <Text fontWeight="bold" fontSize="xs">
+            {t.home.techStackNote}
+          </Text>
+        </Box>
+      )}
+      <Flex gap="3">
+        <Button variant="outline" colorPalette="brandBlue" onClick={email}>
+          <Mail size={16} />
         </Button>
-        <Button colorScheme="purple" onClick={discord}>
-          <DiscordIcon />
+        <Button variant="outline" colorPalette="purple" onClick={discord}>
+          <DiscordIcon size={16} />
         </Button>
-        <Button colorScheme="gray" onClick={goToGitHub}>
-          <GitHubIcon />
+        <Button variant="outline" colorPalette="gray" onClick={goToGitHub}>
+          <GitHubIcon size={16} />
         </Button>
-        <Button colorScheme="orange" onClick={goToReplit}>
-          <ReplitIcon />
+        <Button variant="outline" colorPalette="orange" onClick={goToReplit}>
+          <ReplitIcon size={16} />
         </Button>
-      </ButtonGroup>
+      </Flex>
     </Card>
   );
 }

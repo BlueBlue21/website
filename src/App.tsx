@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { ChakraProvider, Grid, GridItem, Center } from "@chakra-ui/react";
+import { ChakraProvider, Grid, GridItem, Center, Toaster, Toast } from "@chakra-ui/react";
 import { AnimatePresence } from "framer-motion";
 
-import theme from "./theme";
-import Fonts from "./fonts";
+import { system } from "./theme";
+import { toaster } from "./lib/toaster";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
@@ -29,25 +29,34 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
-      <ChakraProvider theme={theme}>
+      <ChakraProvider value={system}>
         <LanguageProvider>
-          <Fonts />
+          <Toaster toaster={toaster}>
+            {(toast) => (
+              <Toast.Root key={toast.id}>
+                <Toast.Indicator />
+                <Toast.Title>{toast.title as string}</Toast.Title>
+                {toast.description && (
+                  <Toast.Description>{toast.description as string}</Toast.Description>
+                )}
+                <Toast.CloseTrigger />
+              </Toast.Root>
+            )}
+          </Toaster>
           <Grid
-            templateAreas={`"navbar"
-                              "main"
-                              "footer"`}
-            gridTemplateRows={"70px 1fr 70px"}
+            templateAreas={`"navbar" "main" "footer"`}
+            gridTemplateRows="70px 1fr 70px"
             h="100vh"
           >
-            <GridItem area={"navbar"} m="10px">
+            <GridItem area="navbar" m="10px">
               <Navbar />
             </GridItem>
-            <GridItem area={"main"}>
+            <GridItem area="main">
               <Center h="full">
                 <AnimatedRoutes />
               </Center>
             </GridItem>
-            <GridItem area={"footer"}>
+            <GridItem area="footer">
               <Footer />
             </GridItem>
           </Grid>

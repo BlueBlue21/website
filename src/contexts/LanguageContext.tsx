@@ -39,8 +39,10 @@ const translations: Record<Language, TranslationStrings> = {
       techStack: "Tech Stack",
       techStackTitle: "My Tech Stack(Temp)",
       techStackLangs: "Languages : C, Go, Python, JavaScript, TypeScript, (HTML, CSS), etc.",
-      techStackOthers: "Others : SQLite, MongoDB, Express, React, Next.js, Chakra UI, Fyne, Godot Engine, etc.",
-      techStackTools: "Tools : Neovim, Visual Studio, Visual Studio Code, Zed, (Some Jetbrains Product), Blender, etc.",
+      techStackOthers:
+        "Others : SQLite, MongoDB, Express, React, Next.js, Chakra UI, Fyne, Godot Engine, etc.",
+      techStackTools:
+        "Tools : Neovim, Visual Studio, Visual Studio Code, Zed, (Some Jetbrains Product), Blender, etc.",
       techStackNote: "* BUT I'M SUPER NOOBB!",
       gender: "He/Him",
       ageUnit: "years old",
@@ -70,8 +72,10 @@ const translations: Record<Language, TranslationStrings> = {
       techStack: "기술 스택",
       techStackTitle: "나의 기술 스택 (임시)",
       techStackLangs: "언어 : C, Go, Python, JavaScript, TypeScript, (HTML, CSS), 기타",
-      techStackOthers: "기타 : SQLite, MongoDB, Express, React, Next.js, Chakra UI, Fyne, Godot Engine, 기타",
-      techStackTools: "도구 : Neovim, Visual Studio, Visual Studio Code, Zed, (일부 Jetbrains 제품), Blender, 기타",
+      techStackOthers:
+        "기타 : SQLite, MongoDB, Express, React, Next.js, Chakra UI, Fyne, Godot Engine, 기타",
+      techStackTools:
+        "도구 : Neovim, Visual Studio, Visual Studio Code, Zed, (일부 Jetbrains 제품), Blender, 기타",
       techStackNote: "* 하지만 저는 완전 초보입니다!",
       gender: "남성",
       ageUnit: "살",

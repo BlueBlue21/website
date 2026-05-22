@@ -1,17 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import {
   Heading,
-  Divider,
+  Separator,
   Text,
   Button,
   Box,
   Link,
   Flex,
-  Tag,
+  Badge,
   Skeleton,
   SkeletonText,
 } from "@chakra-ui/react";
-
 import Title from "../components/Title";
 import Card from "../components/Card";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -45,7 +44,11 @@ async function fetchVelogPosts(username: string): Promise<VelogPost[]> {
 
 export default function Blog() {
   const { t } = useLanguage();
-  const { data: posts, isPending, error } = useQuery({
+  const {
+    data: posts,
+    isPending,
+    error,
+  } = useQuery({
     queryKey: ["velogPosts", config.velogUsername],
     queryFn: () => fetchVelogPosts(config.velogUsername),
   });
@@ -59,15 +62,15 @@ export default function Blog() {
   if (isPending) {
     return (
       <Card height="500px" scrollY={true}>
-        <Heading fontSize="x-large" color="brandBlue.100">
+        <Heading fontSize="xl" color="brandBlue.100">
           {t.blog.title}
         </Heading>
-        <Divider />
+        <Separator />
         <Flex direction="column" gap="4" w="full">
           {Array.from({ length: 5 }).map((_, i) => (
             <Box key={i} textAlign="left" w="full">
               <Skeleton height="22px" mb="2" borderRadius="md" />
-              <SkeletonText noOfLines={2} spacing="2" />
+              <SkeletonText noOfLines={2} gap="2" />
             </Box>
           ))}
         </Flex>
@@ -78,10 +81,10 @@ export default function Blog() {
   if (error || !posts) {
     return (
       <Card height="auto" scrollY={false}>
-        <Heading fontSize="x-large" color="red.500">
+        <Heading fontSize="xl" color="red.500">
           {t.blog.error}
         </Heading>
-        <Button colorScheme="brandBlue" onClick={goToVelog}>
+        <Button colorPalette="brandBlue" onClick={goToVelog}>
           {t.blog.goToVelog}
         </Button>
       </Card>
@@ -91,11 +94,11 @@ export default function Blog() {
   if (posts.length === 0) {
     return (
       <Card height="auto" scrollY={false}>
-        <Heading fontSize="x-large" color="brandBlue.100">
+        <Heading fontSize="xl" color="brandBlue.100">
           {t.blog.comingSoon}
         </Heading>
         <Text>{t.blog.velogPrompt}</Text>
-        <Button colorScheme="brandBlue" onClick={goToVelog}>
+        <Button colorPalette="brandBlue" onClick={goToVelog}>
           {t.blog.goToVelog}
         </Button>
       </Card>
@@ -104,35 +107,36 @@ export default function Blog() {
 
   return (
     <Card height="500px" scrollY={true}>
-      <Heading fontSize="x-large" color="brandBlue.100">
+      <Heading fontSize="xl" color="brandBlue.100">
         {t.blog.title}
       </Heading>
-      <Divider />
+      <Separator />
       <Flex direction="column" gap="4" w="full">
         {posts.map((post) => (
           <Box key={post.id} textAlign="left">
             <Link
               href={`https://velog.io/@${config.velogUsername}/${post.url_slug}`}
-              isExternal
+              target="_blank"
+              rel="noopener noreferrer"
               fontWeight="semibold"
-              fontSize="large"
+              fontSize="lg"
               color="brandBlue.100"
               _hover={{ textDecoration: "none", color: "brandBlue.200" }}
             >
               {post.title}
             </Link>
-            <Text fontSize="xs" color="gray.500" mt="0.5">
+            <Text fontSize="xs" color="fg.muted" mt="1">
               {new Date(post.released_at).toLocaleDateString()}
             </Text>
             <Text fontSize="sm" mt="1">
               {post.short_description || t.blog.noDesc}
             </Text>
             {post.tags.length > 0 && (
-              <Flex gap="1" mt="1" flexWrap="wrap">
+              <Flex gap="1" mt="2" flexWrap="wrap">
                 {post.tags.map((tag) => (
-                  <Tag key={tag} size="sm" colorScheme="brandBlue">
+                  <Badge key={tag} size="sm" colorPalette="brandBlue">
                     {tag}
-                  </Tag>
+                  </Badge>
                 ))}
               </Flex>
             )}

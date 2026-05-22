@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import {
   Heading,
-  Divider,
+  Separator,
   Skeleton,
   SkeletonText,
   Flex,
@@ -9,7 +9,6 @@ import {
   Link,
   Text,
 } from "@chakra-ui/react";
-
 import Title from "../components/Title";
 import Card from "../components/Card";
 import { GitHubIcon } from "../icons";
@@ -27,8 +26,8 @@ export default function Projects() {
   const { isPending, error, data } = useQuery<GitHubRepo[]>({
     queryKey: ["reposData"],
     queryFn: () =>
-      fetch(`https://api.github.com/users/${config.gitHubUsername}/repos`).then(
-        (res) => res.json()
+      fetch(`https://api.github.com/users/${config.gitHubUsername}/repos`).then((res) =>
+        res.json()
       ),
   });
 
@@ -37,21 +36,21 @@ export default function Projects() {
   return (
     <Card height="500px" scrollY={true}>
       {error ? (
-        <Heading fontSize="x-large" color="red.500">
+        <Heading fontSize="xl" color="red.500">
           {t.projects.error}
         </Heading>
       ) : (
-        <Heading fontSize="x-large" color="brandBlue.100">
+        <Heading fontSize="xl" color="brandBlue.100">
           {t.projects.title}
         </Heading>
       )}
-      <Divider />
+      <Separator />
       {isPending ? (
         <Flex direction="column" gap="3" w="full">
           {Array.from({ length: 8 }).map((_, i) => (
             <Box key={i} textAlign="left" w="full">
               <Skeleton height="22px" mb="1" borderRadius="md" />
-              <SkeletonText noOfLines={1} />
+              <SkeletonText noOfLines={1} gap="1" />
             </Box>
           ))}
         </Flex>
@@ -61,15 +60,16 @@ export default function Projects() {
             <Box key={index} textAlign="left">
               <Link
                 href={repo.html_url}
-                isExternal
+                target="_blank"
+                rel="noopener noreferrer"
                 fontWeight="semibold"
-                fontSize="large"
+                fontSize="lg"
                 color="brandBlue.100"
                 _hover={{ textDecoration: "none", color: "brandBlue.200" }}
               >
-                {repo.name} <GitHubIcon mx="2px" />
+                {repo.name} <GitHubIcon size={14} />
               </Link>
-              <Text>{repo.description}</Text>
+              <Text fontSize="sm">{repo.description}</Text>
             </Box>
           ))}
         </Flex>

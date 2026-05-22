@@ -1,13 +1,30 @@
-import {
-  Flex,
-  Text,
-  Spacer,
-  ButtonGroup,
-  Button,
-  useColorMode,
-} from "@chakra-ui/react";
-import { SunIcon, MoonIcon } from "@chakra-ui/icons";
+import { useState, useEffect } from "react";
+import { Flex, Text, Spacer, Group, Button } from "@chakra-ui/react";
+import { Sun, Moon } from "lucide-react";
 import { useLanguage } from "../contexts/LanguageContext";
+
+function useColorMode() {
+  const [colorMode, setColorMode] = useState<"light" | "dark">(() => {
+    if (typeof window !== "undefined") {
+      return document.documentElement.classList.contains("dark") ? "dark" : "light";
+    }
+    return "light";
+  });
+
+  useEffect(() => {
+    if (colorMode === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [colorMode]);
+
+  function toggleColorMode() {
+    setColorMode((prev) => (prev === "light" ? "dark" : "light"));
+  }
+
+  return { colorMode, toggleColorMode };
+}
 
 function LanguageToggleButton() {
   const { t, toggleLanguage } = useLanguage();
@@ -21,8 +38,8 @@ function LanguageToggleButton() {
 function ThemeToggleButton() {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Button colorScheme="brandBlue" onClick={toggleColorMode}>
-      {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+    <Button colorPalette="brandBlue" onClick={toggleColorMode}>
+      {colorMode === "light" ? <Moon size={16} /> : <Sun size={16} />}
     </Button>
   );
 }
@@ -36,10 +53,10 @@ export default function Footer() {
         © {nowYear} BlueBlue. {t.footer.copyright}
       </Text>
       <Spacer />
-      <ButtonGroup>
+      <Group>
         <LanguageToggleButton />
         <ThemeToggleButton />
-      </ButtonGroup>
+      </Group>
     </Flex>
   );
 }
