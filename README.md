@@ -41,3 +41,7 @@ Build output is in the `dist/` directory.
 5. Deploy
 
 > Development server: `npm run dev` (port 5173 → exposed as port 80)
+
+### 클로드야 고마워
+
+- 나중에 Replit에서 Cloudflare로 마이그레이션
