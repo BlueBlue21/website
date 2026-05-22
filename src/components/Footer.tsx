@@ -1,28 +1,36 @@
-import {
-  Flex,
-  Text,
-  Spacer,
-  ButtonGroup,
-  Button,
-  useToast,
-  useColorMode,
-} from "@chakra-ui/react";
-import { SunIcon, MoonIcon } from "@chakra-ui/icons";
+import { useState, useEffect } from "react";
+import { Flex, Text, Spacer, Group, Button } from "@chakra-ui/react";
+import { Sun, Moon } from "lucide-react";
+import { useLanguage } from "../contexts/LanguageContext";
+
+function useColorMode() {
+  const [colorMode, setColorMode] = useState<"light" | "dark">(() => {
+    if (typeof window !== "undefined") {
+      return document.documentElement.classList.contains("dark") ? "dark" : "light";
+    }
+    return "light";
+  });
+
+  useEffect(() => {
+    if (colorMode === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [colorMode]);
+
+  function toggleColorMode() {
+    setColorMode((prev) => (prev === "light" ? "dark" : "light"));
+  }
+
+  return { colorMode, toggleColorMode };
+}
 
 function LanguageToggleButton() {
-  const toast = useToast();
-  function showToast() {
-    toast({
-      title: "미안해요...",
-      description: "아직 한국어 페이지를 만들지 못 했습니다...",
-      status: "info",
-      duration: 1500,
-      isClosable: true,
-    });
-  }
+  const { t, toggleLanguage } = useLanguage();
   return (
-    <Button variant="ghost" onClick={showToast}>
-      한글
+    <Button variant="ghost" onClick={toggleLanguage}>
+      {t.footer.language}
     </Button>
   );
 }
@@ -30,24 +38,25 @@ function LanguageToggleButton() {
 function ThemeToggleButton() {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Button colorScheme="blue" onClick={toggleColorMode}>
-      {colorMode == "light" ? <MoonIcon /> : <SunIcon />}
+    <Button colorPalette="brandBlue" onClick={toggleColorMode}>
+      {colorMode === "light" ? <Moon size={16} /> : <Sun size={16} />}
     </Button>
   );
 }
 
 export default function Footer() {
+  const { t } = useLanguage();
   const nowYear = new Date().getFullYear();
   return (
     <Flex p="20px" h="full" alignItems="center">
       <Text fontWeight="medium">
-        © {nowYear} BlueBlue. All rights reserved.
+        © {nowYear} BlueBlue. {t.footer.copyright}
       </Text>
       <Spacer />
-      <ButtonGroup>
+      <Group>
         <LanguageToggleButton />
         <ThemeToggleButton />
-      </ButtonGroup>
+      </Group>
     </Flex>
   );
 }
