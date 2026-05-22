@@ -1,20 +1,16 @@
-import { fileURLToPath } from "url";
-import { dirname, resolve } from "path";
+import { resolve } from "path";
 import { defineConfig } from "vite";
+import million from "million/compiler";
 import react from "@vitejs/plugin-react";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [million.vite({ auto: true }), react()],
   server: {
     host: "0.0.0.0",
-    port: 5173,
-    watch: { usePolling: true },
-  },
-  preview: {
-    host: "0.0.0.0",
-    port: 4173,
+    watch: {
+      usePolling: true,
+    },
   },
   build: {
     rollupOptions: {

@@ -1,42 +1,50 @@
-import { Link as RouterLink, NavLink } from "react-router-dom";
-import { chakra, Flex, Link, Spacer } from "@chakra-ui/react";
-import { useLanguage } from "../contexts/LanguageContext";
+import { Link as ReactRouterLink, NavLink } from "react-router-dom";
+import { Flex, Link as ChakraLink, Spacer } from "@chakra-ui/react";
 
-function NavLinkButton({ href, children }: { href: string; children: string }) {
+interface NavLinkButtonProps {
+  href: string;
+  children: string;
+}
+
+function NavLinkButton({ href, children }: NavLinkButtonProps) {
   return (
-    <NavLink to={href} style={{ textDecoration: "none" }}>
-      {({ isActive }: { isActive: boolean }) => (
-        <chakra.span
-          fontWeight="medium"
-          fontSize="lg"
-          color={isActive ? "brandBlue.100" : undefined}
-          _hover={{ color: "brandBlue.100" }}
-          transition="colors 0.15s"
-        >
-          {children}
-        </chakra.span>
-      )}
-    </NavLink>
+    <ChakraLink
+      as={NavLink}
+      to={href}
+      fontWeight="medium"
+      fontSize="large"
+      _hover={{ textDecoration: "none", color: "brandBlue.100" }}
+      _activeLink={{ color: "brandBlue.100" }}
+    >
+      {children}
+    </ChakraLink>
   );
 }
 
 export default function Navbar() {
-  const { t } = useLanguage();
   return (
-    <Flex p="10px" h="full" alignItems="center" borderWidth="1px" borderRadius="lg" boxShadow="md">
-      <Link
-        asChild
+    <Flex
+      p="10px"
+      h="full"
+      alignItems="center"
+      borderWidth="1px"
+      borderRadius="lg"
+      boxShadow="md"
+    >
+      <ChakraLink
+        as={ReactRouterLink}
+        to="/"
         fontWeight="semibold"
-        fontSize="xl"
+        fontSize="x-large"
         color="brandBlue.100"
-        _hover={{ color: "brandBlue.200", textDecoration: "none" }}
+        _hover={{ textDecoration: "none", color: "brandBlue.200" }}
       >
-        <RouterLink to="/">BlueBlue21</RouterLink>
-      </Link>
+        BlueBlue21
+      </ChakraLink>
       <Spacer />
-      <Flex gap="4">
-        <NavLinkButton href="/blog">{t.nav.blog}</NavLinkButton>
-        <NavLinkButton href="/projects">{t.nav.projects}</NavLinkButton>
+      <Flex gap="2">
+        <NavLinkButton href="/blog">Blog</NavLinkButton>
+        <NavLinkButton href="/projects">Projects</NavLinkButton>
       </Flex>
     </Flex>
   );

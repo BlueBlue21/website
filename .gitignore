@@ -1,12 +1,12 @@
-# replit (auto-generated cache/temp only)
+# replit
 .config
 .build
 .cache
 .upm
 .tmp
+.git
+replit.nix
+.replit
 
 # node
 /node_modules
-
-# build output
-/dist

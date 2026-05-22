@@ -1,26 +1,46 @@
-import { Box, Flex, Image, Heading, Text, Button, chakra, useDisclosure } from "@chakra-ui/react";
-import { Mail } from "lucide-react";
-import { DiscordIcon, GitHubIcon, ReplitIcon } from "../icons";
-import { toaster } from "../lib/toaster";
-import { useLanguage } from "../contexts/LanguageContext";
+import {
+  AspectRatio,
+  Image,
+  Box,
+  Heading,
+  Highlight,
+  Text,
+  Button,
+  ButtonGroup,
+  useDisclosure,
+  useToast,
+} from "@chakra-ui/react";
+import { EmailIcon } from "@chakra-ui/icons";
+
 import Title from "../components/Title";
 import Card from "../components/Card";
+import { DiscordIcon, GitHubIcon, ReplitIcon } from "../icons";
+
 import { config } from "../config";
 
 export default function Home() {
-  const { t, language } = useLanguage();
-  const { open, onToggle } = useDisclosure();
+  const { getDisclosureProps, getButtonProps } = useDisclosure();
+  const buttonProps = getButtonProps();
+  const disclosureProps = getDisclosureProps();
+  const toast = useToast();
   const myAge = new Date().getFullYear() - 2008;
-
   function showToast(title: string, description: string) {
-    toaster.create({ title, description, type: "info", duration: 3500 });
+    toast({
+      title: title,
+      description: description,
+      status: "info",
+      duration: 3500,
+      isClosable: true,
+    });
   }
   function email() {
-    showToast(t.toast.emailTitle, config.email);
-    location.href = `mailto:${config.email}`;
+    const email = config.email;
+    showToast("Email", email);
+    location.href = `mailto:${email}`;
   }
   function discord() {
-    showToast(t.toast.discordTitle, config.discordUsername);
+    showToast("Discord", config.discordUsername);
+    // window.open(`https://discord.com/users/${config.discordId}`);
   }
   function goToGitHub() {
     window.open(`https://github.com/${config.gitHubUsername}`);
@@ -28,59 +48,64 @@ export default function Home() {
   function goToReplit() {
     window.open(`https://replit.com/@${config.replitUsername}`);
   }
-
   Title("BlueBlue21!");
   return (
     <Card height="auto" scrollY={false}>
-      <Box w="100px" h="100px" borderRadius="full" overflow="hidden" boxShadow="lg">
-        <Image src="/profile.png" alt="Me!" w="full" h="full" objectFit="cover" />
-      </Box>
+      <AspectRatio w="100px" ratio={1 / 1}>
+        <Image
+          src="/profile.png"
+          alt="Me!"
+          objectFit="cover"
+          borderRadius="full"
+          boxShadow="lg"
+        />
+      </AspectRatio>
       <Box>
         <Heading fontSize="xl">
-          {t.home.greeting.split("BlueBlue21")[0]}
-          <chakra.span color="brandBlue.100">BlueBlue21</chakra.span>
-          {t.home.greeting.split("BlueBlue21")[1]}
+          <Highlight query="BlueBlue21!" styles={{ color: "brandBlue.100" }}>
+            Hi, It's BlueBlue21! 👋
+          </Highlight>
         </Heading>
+        <Text>He/Him, {myAge} years old.</Text>
         <Text>
-          {t.home.gender}, {myAge}
-          {language === "ko" ? t.home.ageUnit : ` ${t.home.ageUnit}.`}
+          I was born in Seoul, in South Korea. My dream is to be a happy
+          developer. But I always waste my time...
         </Text>
-        <Text>{t.home.bio}</Text>
       </Box>
-      <Button colorPalette="brandBlue" onClick={onToggle}>
-        {t.home.techStack}
+      <Button {...buttonProps} colorScheme="blue">
+        Tech Stack
       </Button>
-      {open && (
-        <Box w="90%">
-          <Heading fontSize="lg" color="brandBlue.100">
-            {t.home.techStackTitle}
-          </Heading>
-          <Text fontSize="sm">
-            {t.home.techStackLangs}
-            <br />
-            {t.home.techStackOthers}
-            <br />
-            {t.home.techStackTools}
-          </Text>
-          <Text fontWeight="bold" fontSize="xs">
-            {t.home.techStackNote}
-          </Text>
-        </Box>
-      )}
-      <Flex gap="3">
-        <Button variant="outline" colorPalette="brandBlue" onClick={email}>
-          <Mail size={16} />
+      <Box {...disclosureProps} w="90%">
+        <Heading fontSize="large" color="brandBlue.100">
+          My Tech Stack(Temp)
+        </Heading>
+        <Text fontSize="small">
+          Languages : C, Go, Python, JavaScript, TypeScript, (HTML, CSS), etc.
+          <br />
+          Others : SQLite, MongoDB, Express, React, Next.js, Chakra UI, Fyne,
+          Godot Engine, etc.
+          <br />
+          Tools : Neovim, Visual Studio, Visual Studio Code, Zed, (Some
+          Jetbrains Produect), Blender, etc.
+        </Text>
+        <Text fontWeight="bold" fontSize="x-small">
+          * BUT I'M SUPER NOOBB!
+        </Text>
+      </Box>
+      <ButtonGroup variant="outline" spacing="5px">
+        <Button colorScheme="blue" onClick={email}>
+          <EmailIcon />
         </Button>
-        <Button variant="outline" colorPalette="purple" onClick={discord}>
-          <DiscordIcon size={16} />
+        <Button colorScheme="purple" onClick={discord}>
+          <DiscordIcon />
         </Button>
-        <Button variant="outline" colorPalette="gray" onClick={goToGitHub}>
-          <GitHubIcon size={16} />
+        <Button colorScheme="gray" onClick={goToGitHub}>
+          <GitHubIcon />
         </Button>
-        <Button variant="outline" colorPalette="orange" onClick={goToReplit}>
-          <ReplitIcon size={16} />
+        <Button colorScheme="orange" onClick={goToReplit}>
+          <ReplitIcon />
         </Button>
-      </Flex>
+      </ButtonGroup>
     </Card>
   );
 }
