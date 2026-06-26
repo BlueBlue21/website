@@ -8,21 +8,18 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { SunIcon, MoonIcon } from "@chakra-ui/icons";
+import { useTranslation } from "react-i18next";
 
 function LanguageToggleButton() {
-  const toast = useToast();
-  function showToast() {
-    toast({
-      title: "미안해요...",
-      description: "아직 한국어 페이지를 만들지 못 했습니다...",
-      status: "info",
-      duration: 1500,
-      isClosable: true,
-    });
+  const { t, i18n } = useTranslation();
+
+  function toggleLanguage() {
+    i18n.changeLanguage(i18n.language === 'ko' ? 'en' : 'ko');
   }
+
   return (
-    <Button variant="ghost" onClick={showToast}>
-      한글
+    <Button variant="ghost" onClick={toggleLanguage}>
+      {t('koreanToggle')}
     </Button>
   );
 }
@@ -38,10 +35,11 @@ function ThemeToggleButton() {
 
 export default function Footer() {
   const nowYear = new Date().getFullYear();
+  const { t } = useTranslation();
   return (
     <Flex p="20px" h="full" alignItems="center">
       <Text fontWeight="medium">
-        © {nowYear} BlueBlue. All rights reserved.
+        {t('allRightsReserved', { year: nowYear })}
       </Text>
       <Spacer />
       <ButtonGroup>
