@@ -17,8 +17,10 @@ import Card from "../components/Card";
 import { DiscordIcon, GitHubIcon, ReplitIcon } from "../icons";
 
 import { config } from "../config";
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
+  const { t } = useTranslation();
   const { getDisclosureProps, getButtonProps } = useDisclosure();
   const buttonProps = getButtonProps();
   const disclosureProps = getDisclosureProps();
@@ -63,37 +65,32 @@ export default function Home() {
       <Box>
         <Heading fontSize="xl">
           <Highlight query="BlueBlue21!" styles={{ color: "brandBlue.100" }}>
-            Hi, It's BlueBlue21! 👋
+            {t("hiItsBlueBlue")}
           </Highlight>
         </Heading>
-        <Text>He/Him, {myAge} years old.</Text>
-        <Text>
-          I was born in Seoul, in South Korea. My dream is to be a happy
-          developer. But I always waste my time...
-        </Text>
+        <Text>{t("heHimAge", { age: myAge })}</Text>
+        <Text>{t("intro")}</Text>
       </Box>
-      <Button {...buttonProps} colorScheme="blue">
-        Tech Stack
+      <Button {...buttonProps} colorScheme="brandBlue">
+        {t("techStack")}
       </Button>
       <Box {...disclosureProps} w="90%">
         <Heading fontSize="large" color="brandBlue.100">
-          My Tech Stack(Temp)
+          {t("myTechStackTemp")}
         </Heading>
         <Text fontSize="small">
-          Languages : C, Go, Python, JavaScript, TypeScript, (HTML, CSS), etc.
+          {t("languages")}
           <br />
-          Others : SQLite, MongoDB, Express, React, Next.js, Chakra UI, Fyne,
-          Godot Engine, etc.
+          {t("others")}
           <br />
-          Tools : Neovim, Visual Studio, Visual Studio Code, Zed, (Some
-          Jetbrains Produect), Blender, etc.
+          {t("tools")}
         </Text>
         <Text fontWeight="bold" fontSize="x-small">
-          * BUT I'M SUPER NOOBB!
+          {t("butImSuperNoob")}
         </Text>
       </Box>
       <ButtonGroup variant="outline" spacing="5px">
-        <Button colorScheme="blue" onClick={email}>
+        <Button colorScheme="brandBlue" onClick={email}>
           <EmailIcon />
         </Button>
         <Button colorScheme="purple" onClick={discord}>

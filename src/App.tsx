@@ -30,6 +30,7 @@ export default function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:id" element={<Blog />} />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/*" element={<NotFound />} />
               </Routes>

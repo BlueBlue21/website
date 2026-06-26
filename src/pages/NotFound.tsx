@@ -3,9 +3,11 @@ import { Heading, AspectRatio, Image, Text, Button } from "@chakra-ui/react";
 
 import Title from "../components/Title";
 import Card from "../components/Card";
+import { useTranslation } from "react-i18next";
 
 export default function NotFound() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   function backToHome() {
     navigate("/");
   }
@@ -13,7 +15,7 @@ export default function NotFound() {
   return (
     <Card height="auto" scrollY={false}>
       <Heading fontSize="x-large" color="brandBlue.100">
-        404 - Not Found!
+        {t("notFound")}
       </Heading>
       <AspectRatio w="full" ratio={5 / 3}>
         <Image
@@ -23,9 +25,9 @@ export default function NotFound() {
           boxShadow="base"
         />
       </AspectRatio>
-      <Text>* I do not interested in politics.</Text>
-      <Button colorScheme="blue" onClick={backToHome}>
-        Back to home
+      <Text>{t("notInterestedPolitics")}</Text>
+      <Button colorScheme="brandBlue" onClick={backToHome}>
+        {t("backToHome")}
       </Button>
     </Card>
   );

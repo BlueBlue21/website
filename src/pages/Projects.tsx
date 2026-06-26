@@ -15,8 +15,10 @@ import Card from "../components/Card";
 import { GitHubIcon } from "../icons";
 
 import { config } from "../config";
+import { useTranslation } from "react-i18next";
 
 export default function NotFound() {
+  const { t } = useTranslation();
   const [links, changeLinks] = useState<string[]>([]);
   const [names, changeNames] = useState<string[]>([]);
   const [descriptions, changeDescriptions] = useState<string[]>([]);
@@ -41,15 +43,15 @@ export default function NotFound() {
     <Card height="500px" scrollY={true}>
       {error ? (
         <Heading fontSize="x-large" color="red.500">
-          Error!
+          {t("error")}
         </Heading>
       ) : (
         <Heading fontSize="x-large" color="brandBlue.100">
-          Projects
+          {t("projects")}
         </Heading>
       )}
       <Divider />
-      <Skeleton isLoaded={!isPending}>
+      <Skeleton isLoaded={!isPending} minHeight="200px">
         <Flex direction="column" gap="3">
           {names.map((value, index) => (
             <Box key={index}>
