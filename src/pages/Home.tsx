@@ -64,14 +64,14 @@ export default function Home() {
       </AspectRatio>
       <Box>
         <Heading fontSize="xl">
-          <Highlight query="BlueBlue21!" styles={{ color: "brandBlue.100" }}>
+          <Highlight query={["BlueBlue21!", "BlueBlue21"]} styles={{ color: "brandBlue.100" }}>
             {t("hiItsBlueBlue")}
           </Highlight>
         </Heading>
         <Text>{t("heHimAge", { age: myAge })}</Text>
         <Text>{t("intro")}</Text>
       </Box>
-      <Button {...buttonProps} colorScheme="brandBlue">
+      <Button {...buttonProps} colorScheme="blue">
         {t("techStack")}
       </Button>
       <Box {...disclosureProps} w="90%">

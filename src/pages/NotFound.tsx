@@ -26,7 +26,7 @@ export default function NotFound() {
         />
       </AspectRatio>
       <Text>{t("notInterestedPolitics")}</Text>
-      <Button colorScheme="brandBlue" onClick={backToHome}>
+      <Button colorScheme="blue" onClick={backToHome}>
         {t("backToHome")}
       </Button>
     </Card>
