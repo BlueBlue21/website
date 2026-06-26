@@ -27,7 +27,7 @@ function LanguageToggleButton() {
 function ThemeToggleButton() {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
-    <Button colorScheme="blue" onClick={toggleColorMode}>
+    <Button colorScheme="brandBlue" onClick={toggleColorMode}>
       {colorMode == "light" ? <MoonIcon /> : <SunIcon />}
     </Button>
   );

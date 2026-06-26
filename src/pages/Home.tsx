@@ -90,7 +90,7 @@ export default function Home() {
         </Text>
       </Box>
       <ButtonGroup variant="outline" spacing="5px">
-        <Button colorScheme="blue" onClick={email}>
+        <Button colorScheme="brandBlue" onClick={email}>
           <EmailIcon />
         </Button>
         <Button colorScheme="purple" onClick={discord}>
