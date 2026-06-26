@@ -1,4 +1,7 @@
 import { Box, Flex } from "@chakra-ui/react";
+import { motion } from "framer-motion";
+
+const MotionBox = motion(Box);
 
 export default function Card({
   height,
@@ -10,7 +13,10 @@ export default function Card({
   children: React.ReactNode;
 }) {
   return (
-    <Box
+    <MotionBox
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
       p="20px"
       w={{ base: "300px", md: "450px" }}
       h={height}
@@ -22,6 +28,6 @@ export default function Card({
       <Flex direction="column" align="center" textAlign="center" gap="2">
         {children}
       </Flex>
-    </Box>
+    </MotionBox>
   );
 }
