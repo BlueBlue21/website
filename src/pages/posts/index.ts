@@ -1,9 +1,9 @@
 export const posts = [
-  {
-    id: "sample",
-    title: "Hello World!",
-    description: "This is my first blog post.",
-    date: "2024-06-26",
-    content: () => import('./sample.md?raw')
-  }
+	{
+		id: "main",
+		title: "하이요! - Hi!",
+		description: "읽어주세요. - Read me.",
+		date: "2026-06-27",
+		content: () => import("./main.md?raw"),
+	},
 ];

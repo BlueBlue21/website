@@ -1,29 +1,16 @@
-# My Website 📘
-
-Made with Typescript based React and Chakra UI.
-
-SORRY MY ENGLISH VERY SUCKSS...
+# Website 📘
 
 ```bash
-# First Setup
-npm install
-npm run dev
+# First setup
+pnpm install
 
-# Dev
-npm run dev
+# Dev server
+pnpm run dev
 
-# Build and Start
-npm run build
-npm run start
+# Build
+pnpm run build
 ```
 
-## Todo 💎
+## Thanks to Google Jules 💎
 
-- [ ] Korean
-- [ ] Framer Motion
-- [ ] Blog System
-
-## ISSUE 😡😡
-
-- [ ] The Skeleton component of Chakra UI is malfunctioning. (Rewritten by Copilot)
-- [ ] Some buttons do not match the brand blue color. (Rewritten by Copilot)
+:D
